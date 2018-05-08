@@ -12,8 +12,8 @@ You'll need some scripts to actually do anything with it, so take a look at the 
 
 ## Controls
 
-<kbd>Middle Click</kbd> + drag - pan playfield
-<kbd>Ctrl</kbd> + scroll - zoom
+* <kbd>Middle Click</kbd> + drag - pan playfield
+* <kbd>Ctrl</kbd> + scroll - zoom
 
 ## FAQ
 
