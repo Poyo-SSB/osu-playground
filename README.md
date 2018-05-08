@@ -25,5 +25,7 @@ My code is terrible primarily because I don't know what I'm doing, and this is r
 
 Instead, I hope to be able to add similar functionality into osu!lazer when the time comes.
 
+That being said, I will fix issues when I can and will review pull requests if they're submitted.
+
 #### **I found a serious issue!**
 Feel free to report it on the [issues](https://github.com/Poyo-SSB/osu-playground/issues) section of this repository.
