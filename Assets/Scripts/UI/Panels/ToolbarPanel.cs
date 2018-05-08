@@ -9,12 +9,14 @@ namespace OsuPlayground.UI.Panels
         Left,
         Right
     }
-    
+
     /// <summary>
     /// Defines the toolbar at the bottom of the screen and positions buttons within it.
     /// </summary>
     public class ToolbarPanel : Panel
     {
+        public Text Text;
+
         private float leftButtonPosition = 5;
         private float rightButtonPosition = -5;
         private GameObject PositionButton(ToolbarSide side)
@@ -41,6 +43,9 @@ namespace OsuPlayground.UI.Panels
 
                 this.rightButtonPosition -= 105;
             }
+
+            this.Text.rectTransform.anchoredPosition = new Vector2(this.leftButtonPosition + 5, 5);
+            this.Text.rectTransform.sizeDelta = new Vector2(this.RectTransform.rect.width + this.rightButtonPosition - this.leftButtonPosition - 10, -10);
 
             return newObject;
         }

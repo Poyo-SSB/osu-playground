@@ -3,6 +3,7 @@ using OsuPlayground.UI;
 using OsuPlayground.UI.Panels;
 using SFB;
 using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -82,6 +83,7 @@ namespace OsuPlayground
                 if (!String.IsNullOrWhiteSpace(this.scriptManager.CurrentPath))
                 {
                     this.scriptManager.Load();
+                    this.toolbarPanel.Text.text = Path.GetFileName(this.scriptManager.CurrentPath);
                 }
             }
 
