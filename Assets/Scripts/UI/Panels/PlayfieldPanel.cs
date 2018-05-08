@@ -4,6 +4,9 @@ using UnityEngine.EventSystems;
 
 namespace OsuPlayground.UI.Panels
 {
+    /// <summary>
+    /// Defines the main panel containing the cool things.
+    /// </summary>
     public class PlayfieldPanel : Panel, IDragHandler, IScrollHandler
     {
         [SerializeField]
@@ -20,6 +23,8 @@ namespace OsuPlayground.UI.Panels
 
         private void Update()
         {
+            // This function primarily handles zooming and panning.
+
             this.zoomFactor = Mathf.Pow(2, this.RawZoom / 4 - 0.25f);
 
             var availableSpace = this.RectTransform.rect.size;
@@ -56,12 +61,21 @@ namespace OsuPlayground.UI.Panels
                 Playfield.HEIGHT);
         }
 
-        public void OnDrag(PointerEventData eventData) => this.RawOffset += eventData.delta / this.zoomFactor;
+        public void OnDrag(PointerEventData eventData)
+        {
+            if (eventData.button != PointerEventData.InputButton.Left)
+            {
+                this.RawOffset += eventData.delta / this.zoomFactor;
+            }
+        }
 
         public void OnScroll(PointerEventData eventData)
         {
-            this.RawZoom += Mathf.Round(eventData.scrollDelta.y);
-            this.RawZoom = Mathf.Clamp(this.RawZoom, -20, 12);
+            if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+            {
+                this.RawZoom += Mathf.Round(eventData.scrollDelta.y);
+                this.RawZoom = Mathf.Clamp(this.RawZoom, -20, 12);
+            }
         }
     }
 }

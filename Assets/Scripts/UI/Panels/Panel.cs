@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace OsuPlayground.UI.Panels
 {
+    /// <summary>
+    /// Defines a base class for UI panels.
+    /// </summary>
     [RequireComponent(typeof(RectTransform), typeof(CanvasGroup), typeof(Image))]
     public abstract class Panel : MonoBehaviour
     {

@@ -2,6 +2,9 @@
 
 namespace OsuPlayground.HitObjects.Drawable.Components.Helpers
 {
+    /// <summary>
+    /// Creates cool vertices.
+    /// </summary>
     public static class MeshHelper
     {
         public static UIVertex Vertex(Vector2 position, Color color)

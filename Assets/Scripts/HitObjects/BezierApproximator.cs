@@ -3,6 +3,8 @@ using UnityEngine;
 
 namespace OsuPlayground.HitObjects
 {
+    // This code was adapted from the following file:
+    // https://github.com/ppy/osu/blob/master/osu.Game/Rulesets/Objects/BezierApproximator.cs
     public class BezierApproximator
     {
         private readonly int count;

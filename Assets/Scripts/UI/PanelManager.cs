@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace OsuPlayground.UI
 {
+    /// <summary>
+    /// Very powerful class. Treat carefully. Controls all panels.
+    /// </summary>
     public class PanelManager : MonoBehaviour
     {
         [SerializeField]
@@ -12,6 +15,9 @@ namespace OsuPlayground.UI
         [SerializeField]
         private PlayfieldPanel playfield;
 
+        /// <summary>
+        /// Positions each panel.
+        /// </summary>
         private void Update()
         {
             var optionsWidth = Options.ShowOptions.Value ? Constants.OPTIONS_WIDTH : 0;

@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 namespace OsuPlayground.HitObjects.Drawable.Components
 {
+    /// <summary>
+    /// Represents both hit circles and slider heads.
+    /// </summary>
     public class Circle : MaskableGraphic
     {
         public Vector2 Position;

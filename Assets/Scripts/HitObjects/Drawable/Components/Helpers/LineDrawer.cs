@@ -4,8 +4,15 @@ using UnityEngine.UI;
 
 namespace OsuPlayground.HitObjects.Drawable.Components.Helpers
 {
+    /// <summary>
+    /// Draws a line of arbitrary radius with rounded caps.
+    /// </summary>
     public static class LineDrawer
     {
+        /// <summary>
+        /// Instead of calculating something logically, this function instead just draws an entire new segment with every pair of points.
+        /// This means that there are several orders of magnitude more vertices than necessary, but it's mathematically easy (for me).
+        /// </summary>
         public static void Line(List<Vector2> positions, VertexHelper vh, float radius, Color color)
         {
             var segmentCount = positions.Count - 1;

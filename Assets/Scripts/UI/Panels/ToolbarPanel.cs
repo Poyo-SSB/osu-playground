@@ -9,7 +9,10 @@ namespace OsuPlayground.UI.Panels
         Left,
         Right
     }
-
+    
+    /// <summary>
+    /// Defines the toolbar at the bottom of the screen and positions buttons within it.
+    /// </summary>
     public class ToolbarPanel : Panel
     {
         private float leftButtonPosition = 5;

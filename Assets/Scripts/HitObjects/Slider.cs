@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace OsuPlayground.HitObjects
 {
+    // This code was adapted from the following file:
+    // https://github.com/ppy/osu/blob/master/osu.Game/Rulesets/Objects/SliderCurve.cs
     public class Slider : HitObject
     {
         public float Distance;

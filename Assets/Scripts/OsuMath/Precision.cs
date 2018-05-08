@@ -3,6 +3,8 @@ using UnityEngine;
 
 namespace OsuPlayground.OsuMath
 {
+    // This code was adapted from the following file:
+    // https://github.com/ppy/osu-framework/blob/master/osu.Framework/MathUtils/Precision.cs
     public static class Precision
     {
         public const float FLOAT_EPSILON = 1e-3f;

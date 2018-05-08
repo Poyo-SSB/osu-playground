@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace OsuPlayground.UI
 {
+    /// <summary>
+    /// Draws a border of a specified width which contains its <see cref="RectTransform"/>'s area.
+    /// </summary>
     public class Border : MaskableGraphic
     {
         public float Width = 3;
@@ -23,6 +26,8 @@ namespace OsuPlayground.UI
         
         protected override void OnPopulateMesh(VertexHelper vh)
         {
+            // Manually define eight vertices and triangles.
+            
             vh.Clear();
 
             Vector2 from = this.rectTransform.rect.min;

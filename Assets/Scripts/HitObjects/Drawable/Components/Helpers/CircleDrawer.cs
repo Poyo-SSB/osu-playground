@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace OsuPlayground.HitObjects.Drawable.Components.Helpers
 {
+    /// <summary>
+    /// Draws a circle.
+    /// </summary>
     public static class CircleDrawer
     {
         public static void Circle(Vector2 position, VertexHelper vh, float radius, Color color)

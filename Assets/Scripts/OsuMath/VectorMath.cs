@@ -5,6 +5,9 @@ namespace OsuPlayground.OsuMath
 {
     public static class VectorMath
     {
+        /// <summary>
+        /// Offsets an input position to account for the osu! playfield coordinate system.
+        /// </summary>
         public static Vector2 PlayfieldOffset(this Vector2 input)
         {
             return new Vector2(

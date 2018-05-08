@@ -24,6 +24,7 @@ namespace OsuPlayground.UI.Handles
 
         public void OnDrag(PointerEventData eventData)
         {
+            // Set the color because the handles lag behind by one frame for some reason which I don't care enough to ascertain.
             this.center.color = Constants.HANDLE_COLOR;
             this.Bound.Value += new Vector2(eventData.delta.x, -eventData.delta.y) / this.ratio;
         }

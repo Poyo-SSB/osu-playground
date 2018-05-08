@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace OsuPlayground.UI.Panels
 {
+    /// <summary>
+    /// Contains option objects for manipulation.
+    /// </summary>
     public class OptionsPanel : Panel
     {
         [SerializeField]

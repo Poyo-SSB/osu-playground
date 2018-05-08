@@ -29,6 +29,7 @@ namespace OsuPlayground.HitObjects.Drawable
             this.Body.Path = keyValuePair.Value.GetPath().Select(x => ratio * x.PlayfieldOffset()).ToList();
             this.Body.SetVerticesDirty();
 
+            // Calculate the positions of ticks and draw them accordingly.
             var tickDistance = 100 * Options.SliderMultiplier.Value * Options.SpeedMultiplier.Value / Options.TickRate.Value;
 
             List<Vector2> tickPositions = new List<Vector2>();

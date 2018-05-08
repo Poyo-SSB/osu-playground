@@ -1,7 +1,5 @@
-﻿using OsuPlayground.Bindables;
-using OsuPlayground.Scripting;
+﻿using OsuPlayground.Scripting;
 using OsuPlayground.UI;
-using OsuPlayground.UI.Handles;
 using OsuPlayground.UI.Panels;
 using SFB;
 using System;
@@ -10,6 +8,9 @@ using UnityEngine.UI;
 
 namespace OsuPlayground
 {
+    /// <summary>
+    /// The main controller for the application.
+    /// </summary>
     public class Playground : MonoBehaviour
     {
         public static GameObject ToolbarButtonPrefab;
@@ -84,6 +85,7 @@ namespace OsuPlayground
                 }
             }
 
+            // Blue.
             var optionColor = new Color(0.184313725f, 0.631372549f, 0.839215686f);
             this.optionsPanel.AddOption(Options.CircleSize, "Circle size", 1, 0, 10, optionColor);
             this.optionsPanel.AddOption(Options.SliderMultiplier, "Slider multiplier", 2, 0.4f, 3.6f, optionColor);
@@ -106,6 +108,8 @@ namespace OsuPlayground
 
         private void LoadFile(Button button)
         {
+            // Unity does not provide a way to open a file prompt, so I had to use a library to do it.
+            // I will admit that the library is wonderful.
             var files = StandaloneFileBrowser.OpenFilePanel("Load file", String.Empty, new ExtensionFilter[]
             {
                 new ExtensionFilter("osu!Playground scripts", "oss", "js" ),
@@ -145,6 +149,6 @@ namespace OsuPlayground
             button.GetComponentInChildren<Text>().text = Options.ShowOptions.Value ? "Hide" : "Show";
         }
 
-        private void OpenWiki(Button button) => Application.OpenURL("http://goog/");
+        private void OpenWiki(Button button) => Application.OpenURL("https://github.com/Poyo-SSB/osu-playground/wiki");
     }
 }

@@ -8,6 +8,9 @@ using UnityEngine;
 
 namespace OsuPlayground.UI
 {
+    /// <summary>
+    /// Actually draws hit objects.
+    /// </summary>
     public class Playfield : MonoBehaviour
     {
         public const int WIDTH = 512;
@@ -54,13 +57,19 @@ namespace OsuPlayground.UI
 
         private void LateUpdate()
         {
-            var ratio = this.RectTransform.rect.width / Playfield.WIDTH;
+            // Let's draw.
 
+            // First get the ratio between the screen's width and the arbitrary playfield width.
+            var ratio = this.RectTransform.rect.width / WIDTH;
+
+            // This is the formula for circle size in arbitrary "osu!pixels."
             var radius = 64 * ((1 - 0.7f * (Options.CircleSize.Value - 5) / 5) / 2);
 
+            // How many of each object type have been buffered this frame?
             var circleCount = this.hitCircleBuffer.Count;
             var sliderCount = this.sliderBuffer.Count;
 
+            // Create displayable objects if there aren't enough.
             for (int i = 0; i < circleCount; i++)
             {
                 if (i >= this.hitCircles.Count)
@@ -76,6 +85,7 @@ namespace OsuPlayground.UI
                 }
             }
 
+            // Set the relevant variables so the hit objects are drawn in the right place.
             for (int i = 0; i < circleCount; i++)
             {
                 this.hitCircles[i].UpdateWith(radius, ratio, this.hitCircleBuffer.ElementAt(i));
@@ -87,16 +97,17 @@ namespace OsuPlayground.UI
                 this.sliders[i].transform.SetSiblingIndex(this.bufferIndex - this.sliderBuffer.ElementAt(i).Key);
             }
 
+            // Hide any excess hit objects. This is done to avoid garbage collection every frame, which would cause absurd performance drops.
             for (int i = 0; i < this.hitCircles.Count; i++)
             {
                 this.hitCircles[i].gameObject.SetActive(i < circleCount);
             }
-
             for (int i = 0; i < this.sliders.Count; i++)
             {
                 this.sliders[i].gameObject.SetActive(i < sliderCount);
             }
 
+            // Create the text to be used for exporting the created patterns to text.
             StringBuilder exportBuilder = new StringBuilder();
 
             for (int i = 1; i < circleCount + sliderCount + 1; i++)
@@ -113,6 +124,7 @@ namespace OsuPlayground.UI
 
             this.LatestHitObjects = exportBuilder.ToString();
 
+            // Set the hit object index to 0 and clear the buffers so that they're fresh for the next frame.
             this.bufferIndex = 0;
             this.hitCircleBuffer.Clear();
             this.sliderBuffer.Clear();

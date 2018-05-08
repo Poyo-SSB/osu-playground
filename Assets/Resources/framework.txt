@@ -1,3 +1,5 @@
+// Why is this a .txt file instead of a .js or .oss file? That's because Unity is stupid.
+
 var UnityEngine = importNamespace('UnityEngine');
 var OsuPlayground = importNamespace('OsuPlayground');
 var Vector2 = UnityEngine.Vector2;

@@ -3,7 +3,6 @@ using OsuPlayground.HitObjects;
 using OsuPlayground.UI;
 using OsuPlayground.UI.Handles;
 using OsuPlayground.UI.Panels;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -11,9 +10,11 @@ namespace OsuPlayground.Scripting
 {
     public class ScriptUtilites
     {
+        // Utility constants.
         public const int PLAYFIELD_WIDTH = 512;
         public const int PLAYFIELD_HEIGHT = 384;
 
+        // Used for creating sidebar options.
         private static readonly Color green = new Color(0.525490196f, 0.898039216f, 0.278431373f);
 
         private BindableList variables;
@@ -41,6 +42,8 @@ namespace OsuPlayground.Scripting
         public Bindable<Vector2> AddVector2(string name, Vector2 input)
             => this.variables.Add(name, input);
 
+        // Repeated methods like this are a result of the fact that Jint is unwilling to automatically convert values.
+        // For example, using pure C#, this first function can be called with only numbers, and they will be implicitly converted.
         public void AddOptionFloat(Bindable<float> variable, string name, int precision, Bindable<float> min, Bindable<float> max)
             => this.optionsPanel.AddOption(variable, name, precision, min, max, green);
         public void AddOptionFloat(Bindable<float> variable, string name, int precision, float min, Bindable<float> max)
@@ -65,6 +68,7 @@ namespace OsuPlayground.Scripting
         public void AddOptionVector2(Bindable<Vector2> variable, string name)
         {
             this.optionsPanel.AddOption(variable, name, green);
+            // Also create a draggable handle.
             this.handleManager.CreateHandle(variable);
         }
 
@@ -85,6 +89,7 @@ namespace OsuPlayground.Scripting
         public HitCircle AddHitCircle(Vector2 position)
             => this.playfield.HitCircle(position, true);
 
+        // Jint passes JavaScript arrays to C# code as objects[], hence the casting.
         public Slider AddSlider(CurveType curveType, object[] list, bool draw)
             => this.playfield.Slider(curveType, list.Cast<Vector2>().ToList(), draw);
         public Slider AddSlider(CurveType curveType, object[] list)
