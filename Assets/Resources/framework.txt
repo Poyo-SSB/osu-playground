@@ -1,0 +1,35 @@
+var UnityEngine = importNamespace('UnityEngine');
+var OsuPlayground = importNamespace('OsuPlayground');
+var Vector2 = UnityEngine.Vector2;
+var CurveType = OsuPlayground.HitObjects.CurveType
+var Vector2List = System.Collections.Generic.List(Vector2);
+
+function add(a, b) {
+    return new Vector2(a.x + b.x, a.y + b.y);
+}
+function subtract(a, b) {
+    return new Vector2(a.x - b.x, a.y - b.y);
+}
+function multiply(a, b) {
+    return new Vector2(a.x * b.x, a.y * b.y);
+}
+function divide(a, b) {
+    return new Vector2(a.x / b.x, a.y / b.y);
+}
+function scale(a, b) {
+    return new Vector2(a.x * b, a.y * b);
+}
+
+function rotate(point, around, angle) {
+    var temporaryPoint = subtract(point, around);
+    
+    var cos = Math.cos(angle);
+    var sin = Math.sin(angle);
+
+    var tx = temporaryPoint.x;
+    var ty = temporaryPoint.y;
+    var nx = (cos * tx) - (sin * ty);
+    var ny = (sin * tx) + (cos * ty);
+
+    return add(new Vector2(nx, ny), around);
+}
