@@ -60,6 +60,8 @@ namespace OsuPlayground
 
         private void Awake()
         {
+            Options.Reset();
+
             ToolbarButtonPrefab = this.toolbarButtonPrefab;
             OptionNumberPrefab = this.optionNumberPrefab;
             OptionBoolPrefab = this.optionBoolPrefab;

@@ -5,6 +5,19 @@ namespace OsuPlayground
     public static class Options
     {
         /// <summary>
+        /// Resets every option.
+        /// </summary>
+        public static void Reset()
+        {
+            ShowOptions = true;
+            CircleSize = 4;
+            SliderMultiplier = 1.4f;
+            SpeedMultiplier = 1;
+            TickRate = 1;
+            BeatSnapDivisor = 4;
+        }
+
+        /// <summary>
         /// Defines if the options panel should be shown.
         /// </summary>
         public static Bindable<bool> ShowOptions = true;
