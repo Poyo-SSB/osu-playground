@@ -10,6 +10,11 @@ As such, I decided to make this, **osu!playground**. It allows a user to make th
 
 You'll need some scripts to actually do anything with it, so take a look at the [wiki](https://github.com/Poyo-SSB/osu-playground/wiki) to get started.
 
+## Controls
+
+<kbd>Middle Click</kbd> + drag - pan playfield
+<kbd>Ctrl</kbd> + scroll - zoom
+
 ## FAQ
 
 #### **Help! There's nothing on the playfield to change.**
