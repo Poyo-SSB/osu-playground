@@ -2,7 +2,7 @@
 
 I don't like the current *osu!* editor. For a person like me who likes interesting geomtry, perfection is difficult to achieve using it alone.
 
-![a](https://i.imgur.com/yG5uziP.png)
+![a](https://i.imgur.com/fk22Lzm.png)
 
 As such, I decided to make this, **osu!playground**. It allows a user to make their own patterns using code and math, then export them into their own *osu!* maps by copying the code.
 
