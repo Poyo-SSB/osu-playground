@@ -15,10 +15,7 @@ namespace OsuPlayground.Scripting
     /// </summary>
     public class ScriptManager : MonoBehaviour
     {
-        private BindableList variables;
-
         private string baseCode;
-        private ScriptUtilites utilities;
 
         /// <summary>
         /// The path to the last script which was attempted to be loaded.
@@ -62,26 +59,21 @@ namespace OsuPlayground.Scripting
             this.UpdateFunction = () => { return; };
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
             this.Error = error;
-            return;
         }
 
         public void Load()
         {
-            // Reset relevant variables.
-            this.variables = new BindableList();
-            this.utilities = new ScriptUtilites(
-                this.variables,
-                FindObjectOfType<Playfield>(),
-                FindObjectOfType<HandleManager>(),
-                FindObjectOfType<OptionsPanel>());
-
             var code = File.ReadAllText(this.CurrentPath);
 
             // Create JavaScript engine and allow access to relevant libraries.
             var engine = new Engine(cfg => cfg.AllowClr(typeof(Vector2).Assembly, typeof(Playground).Assembly));
 
             // Allow user to do things.
-            engine.SetValue("Playground", this.utilities);
+            engine.SetValue("Playground", new ScriptUtilites(
+                new BindableList(),
+                FindObjectOfType<Playfield>(),
+                FindObjectOfType<HandleManager>(),
+                FindObjectOfType<OptionsPanel>()));
 
             try
             {

@@ -4,7 +4,6 @@ var UnityEngine = importNamespace('UnityEngine');
 var OsuPlayground = importNamespace('OsuPlayground');
 var Vector2 = UnityEngine.Vector2;
 var CurveType = OsuPlayground.HitObjects.CurveType
-var Vector2List = System.Collections.Generic.List(Vector2);
 
 function add(a, b) {
     return new Vector2(a.x + b.x, a.y + b.y);

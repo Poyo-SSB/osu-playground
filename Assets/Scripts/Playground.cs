@@ -76,17 +76,22 @@ namespace OsuPlayground
 
         private void Start()
         {
+            if (!String.IsNullOrWhiteSpace(this.scriptManager.CurrentPath))
+            {
+                this.toolbarPanel.Text.text = Path.GetFileName(this.scriptManager.CurrentPath);
+            }
+
             if (!String.IsNullOrWhiteSpace(this.scriptManager.Error))
             {
                 this.errorPanel.Text.text = this.scriptManager.Error;
                 this.errorPanel.gameObject.SetActive(true);
+                this.scriptManager.Error = null;
             }
             else
             {
                 if (!String.IsNullOrWhiteSpace(this.scriptManager.CurrentPath))
                 {
                     this.scriptManager.Load();
-                    this.toolbarPanel.Text.text = Path.GetFileName(this.scriptManager.CurrentPath);
                 }
             }
 
