@@ -35,3 +35,7 @@ function rotate(point, around, angle) {
 
     return add(new Vector2(nx, ny), around);
 }
+
+Math.lerp = function(v0, v1, t) {
+    return (1 - t) * v0 + t * v1;
+};
