@@ -1,4 +1,5 @@
-﻿using OsuPlayground.Scripting;
+﻿using Jint.Runtime;
+using OsuPlayground.Scripting;
 using OsuPlayground.UI;
 using OsuPlayground.UI.Panels;
 using SFB;
@@ -105,10 +106,27 @@ namespace OsuPlayground
             this.toolbarPanel.AddButton("Hide", this.ToggleOptions, ToolbarSide.Right);
             this.toolbarPanel.AddButton("Open wiki", this.OpenWiki, ToolbarSide.Right);
 
-            this.scriptManager.StartFunction();
+            try
+            {
+                this.scriptManager.StartFunction();
+            }
+            catch (JavaScriptException e)
+            {
+                this.scriptManager.ReloadError("Error in start(): " + e.Message);
+            }
         }
 
-        private void Update() => this.scriptManager.UpdateFunction();
+        private void Update()
+        {
+            try
+            {
+                this.scriptManager.UpdateFunction();
+            }
+            catch (JavaScriptException e)
+            {
+                this.scriptManager.ReloadError("Error in update(): " + e.Message);
+            }
+        }
 
         private void LoadFile(Button button)
         {

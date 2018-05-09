@@ -56,6 +56,15 @@ namespace OsuPlayground.Scripting
             SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
         }
 
+        public void ReloadError(string error)
+        {
+            this.StartFunction = () => { return; };
+            this.UpdateFunction = () => { return; };
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+            this.Error = error;
+            return;
+        }
+
         public void Load()
         {
             // Reset relevant variables.
@@ -81,12 +90,7 @@ namespace OsuPlayground.Scripting
             catch (Exception e)
             {
                 // In the event of a parse error or something, tell the user.
-                var nowPath = this.CurrentPath;
-                this.StartFunction = () => { return; };
-                this.UpdateFunction = () => { return; };
-                this.Reload(String.Empty);
-                this.Error = e.GetType() + " " + e.Message;
-                this.CurrentPath = nowPath;
+                this.ReloadError("Error while loading: " + e.Message);
                 return;
             }
 
