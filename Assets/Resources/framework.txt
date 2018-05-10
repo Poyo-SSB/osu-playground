@@ -20,6 +20,10 @@ function divide(a, b) {
 function scale(a, b) {
     return new Vector2(a.x * b, a.y * b);
 }
+function normalize(p) {
+    var w = Math.sqrt(p.x * p.x + p.y * p.y);
+    return new Vector2(p.x / w, p.y / w);
+}
 
 function rotate(point, around, angle) {
     var temporaryPoint = subtract(point, around);
