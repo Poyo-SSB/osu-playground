@@ -20,6 +20,7 @@ namespace OsuPlayground
         public static GameObject OptionNumberPrefab;
         public static GameObject OptionBoolPrefab;
         public static GameObject OptionVector2Prefab;
+        public static GameObject OptionChoicePrefab;
 
         public static GameObject DrawableHitCirclePrefab;
         public static GameObject DrawableSliderPrefab;
@@ -36,6 +37,8 @@ namespace OsuPlayground
         private GameObject optionBoolPrefab;
         [SerializeField]
         private GameObject optionVector2Prefab;
+        [SerializeField]
+        private GameObject optionChoicePrefab;
 
         [SerializeField]
         private GameObject drawableHitCirclePrefab;
@@ -67,6 +70,7 @@ namespace OsuPlayground
             OptionNumberPrefab = this.optionNumberPrefab;
             OptionBoolPrefab = this.optionBoolPrefab;
             OptionVector2Prefab = this.optionVector2Prefab;
+            OptionChoicePrefab = this.optionChoicePrefab;
             DrawableHitCirclePrefab = this.drawableHitCirclePrefab;
             DrawableSliderPrefab = this.drawableSliderPrefab;
             HandlePrefab = this.handlePrefab;
