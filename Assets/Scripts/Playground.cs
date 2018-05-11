@@ -137,18 +137,18 @@ namespace OsuPlayground
         {
             // Unity does not provide a way to open a file prompt, so I had to use a library to do it.
             // I will admit that the library is wonderful.
-            var files = StandaloneFileBrowser.OpenFilePanel("Load file", String.Empty, new ExtensionFilter[]
+            StandaloneFileBrowser.OpenFilePanelAsync("Load file", String.Empty, new ExtensionFilter[]
             {
                 new ExtensionFilter("osu!Playground scripts", "oss", "js" ),
                 new ExtensionFilter("All Files", "*" ),
-            }, false);
+            }, false, files => {
+                if (files == null || files.Length < 1)
+                {
+                    return;
+                }
 
-            if (files == null || files.Length < 1)
-            {
-                return;
-            }
-
-            this.scriptManager.Reload(files[0]);
+                this.scriptManager.Reload(files[0]);
+            });
         }
 
         private void Reload(Button button)
