@@ -1,6 +1,8 @@
 ﻿using OsuPlayground.Bindables;
 using OsuPlayground.UI.OptionObjects;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -128,6 +130,25 @@ namespace OsuPlayground.UI.Panels
                     variable.Value = new Vector2(Mathf.Round(variable.Value.x), Mathf.Round(number));
                 }
             });
+        }
+
+        public void AddOption(Bindable<string> variable, string name, List<string> options, Color color)
+        {
+            var newObject = Instantiate(Playground.OptionChoicePrefab, this.container);
+            var component = newObject.GetComponent<OptionChoice>();
+
+            component.Text.text = name;
+            component.Text.color = color;
+            component.ColorBar.color = color;
+            component.Dropdown.captionText.color = color;
+            component.Dropdown.itemText.color = color;
+            component.Dropdown.options = options.Select(x => new Dropdown.OptionData {
+                text = x
+            }).ToList();
+
+            variable.ValueChanged += (value) => component.Dropdown.value = options.IndexOf(value);
+
+            component.Dropdown.onValueChanged.AddListener((value) => variable.Value = options[value]);
         }
     }
 }

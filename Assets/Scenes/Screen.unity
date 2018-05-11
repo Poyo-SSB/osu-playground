@@ -352,6 +352,8 @@ MonoBehaviour:
     type: 2}
   optionVector2Prefab: {fileID: 1261499716198046, guid: 313cfa34aee75ef47b9b5eaa5052092f,
     type: 2}
+  optionChoicePrefab: {fileID: 1925895912982760, guid: 49b7086980e1e8d469d000517dde433e,
+    type: 2}
   drawableHitCirclePrefab: {fileID: 1286918516886198, guid: 73a10102ebcca4a45ba0f1cab642a861,
     type: 2}
   drawableSliderPrefab: {fileID: 1531275926970192, guid: 27d50fabc00776a4b837b219503f2447,
@@ -1095,7 +1097,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8, y: -0.000005722046}
+  m_AnchoredPosition: {x: -8, y: 0.0000066506923}
   m_SizeDelta: {x: -16, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1210386437

@@ -42,6 +42,9 @@ namespace OsuPlayground.Scripting
         public Bindable<Vector2> AddVector2(string name, Vector2 input)
             => this.variables.Add(name, input);
 
+        public Bindable<string> AddChoice(string name, string input)
+            => this.variables.Add(name, input);
+
         // Repeated methods like this are a result of the fact that Jint is unwilling to automatically convert values.
         // For example, using pure C#, this first function can be called with only numbers, and they will be implicitly converted.
         public void AddOptionFloat(Bindable<float> variable, string name, int precision, Bindable<float> min, Bindable<float> max)
@@ -72,6 +75,9 @@ namespace OsuPlayground.Scripting
             this.handleManager.CreateHandle(variable);
         }
 
+        public void AddOptionChoice(Bindable<string> variable, string name, object[] values)
+            => this.optionsPanel.AddOption(variable, name, values.Cast<string>().ToList(), green);
+
         public float GetValueFloat(string name)
             => this.variables.Value<float>(name);
 
@@ -84,6 +90,9 @@ namespace OsuPlayground.Scripting
         public Vector2 GetValueVector2(string name)
             => this.variables.Value<Vector2>(name);
 
+        public string GetValueChoice(string name)
+            => this.variables.Value<string>(name);
+
         public HitCircle AddHitCircle(Vector2 position, bool draw)
             => this.playfield.HitCircle(position, draw);
         public HitCircle AddHitCircle(Vector2 position)
@@ -94,6 +103,5 @@ namespace OsuPlayground.Scripting
             => this.playfield.Slider(curveType, list.Cast<Vector2>().ToList(), draw);
         public Slider AddSlider(CurveType curveType, object[] list)
             => this.playfield.Slider(curveType, list.Cast<Vector2>().ToList(), true);
-
     }
 }
