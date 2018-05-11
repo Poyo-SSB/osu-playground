@@ -39,6 +39,12 @@ function rotate(point, around, angle) {
     return add(new Vector2(nx, ny), around);
 }
 
-Math.lerp = function(v0, v1, t) {
-    return (1 - t) * v0 + t * v1;
+Math.lerp = function(from, to, t) {
+    return (1 - t) * from + t * to;
 };
+
+Math.PHI = (1 + Math.sqrt(5)) / 2;
+
+function lerp(from, to, t) {
+    return new Vector2(Math.lerp(from.x, to.x, t), Math.lerp(from.y, to.y, t));
+}
