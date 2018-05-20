@@ -39,6 +39,10 @@ function rotate(point, around, angle) {
     return add(new Vector2(nx, ny), around);
 }
 
+function distance(a, b) {
+    return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+}
+
 Math.lerp = function(from, to, t) {
     return (1 - t) * from + t * to;
 };
