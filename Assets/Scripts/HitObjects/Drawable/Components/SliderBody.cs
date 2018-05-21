@@ -16,6 +16,10 @@ namespace OsuPlayground.HitObjects.Drawable.Components
 
             LineDrawer.Line(this.Path, vh, this.Radius, Constants.BORDER_COLOR);
             LineDrawer.Line(this.Path, vh, this.Radius * Constants.BODY_SIZE_MULTIPLIER, Constants.BODY_COLOR);
+
+            var collider = this.GetComponent<SphereCollider>();
+            collider.center = this.Path[this.Path.Count - 1];
+            collider.radius = this.Radius;
         }
     }
 }
