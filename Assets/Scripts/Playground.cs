@@ -103,7 +103,7 @@ namespace OsuPlayground
             var optionColor = new Color(0.184313725f, 0.631372549f, 0.839215686f);
             this.optionsPanel.AddOption(Options.CircleSize, "Circle size", 1, 0, 10, optionColor);
             this.optionsPanel.AddOption(Options.SliderMultiplier, "Slider multiplier", 2, 0.4f, 3.6f, optionColor);
-            this.optionsPanel.AddOption(Options.SpeedMultiplier, "Speed multiplier", 2, 0.1f, 4, optionColor);
+            this.optionsPanel.AddOption(Options.SpeedMultiplier, "Speed multiplier", 2, 0.1f, 10, optionColor);
             this.optionsPanel.AddOption(Options.TickRate, "Tick rate", 1, 4, optionColor);
             this.optionsPanel.AddOption(Options.BeatSnapDivisor, "Beat snap", 1, 16, optionColor);
 
