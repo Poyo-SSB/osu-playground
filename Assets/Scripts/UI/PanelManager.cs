@@ -24,8 +24,6 @@ namespace OsuPlayground.UI
         /// </summary>
         private void Update()
         {
-            this.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
-
             var optionsWidth = Options.ShowOptions.Value ? Constants.OPTIONS_WIDTH : 0;
 
             this.toolbar.Background.color = Constants.TOOLBAR_COLOR;
