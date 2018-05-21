@@ -56,6 +56,23 @@ namespace OsuPlayground.UI
             return slider;
         }
 
+        public Slider Slider(CurveType type, List<Vector2> list, bool draw, float length)
+        {
+            var slider = new Slider
+            {
+                CurveType = type,
+                Position = list[0],
+                ControlPoints = list,
+                Length = length
+            };
+
+            if (draw)
+            {
+                this.sliderBuffer.Add(++this.bufferIndex, slider);
+            }
+            return slider;
+        }
+
         private void LateUpdate()
         {
             // Let's draw.
@@ -148,7 +165,7 @@ namespace OsuPlayground.UI
                     this.HoveredObject = $"[{slider.Index}] Slider - " +
                         $"start: ({Mathf.Round(slider.Position.x * 100f) / 100f}, {Mathf.Round(slider.Position.y * 100f) / 100f}), " +
                         $"end: ({Mathf.Round(slider.Slider.PositionAt(1).x * 100f) / 100f}, {Mathf.Round(slider.Slider.PositionAt(1).y * 100f) / 100f}), " +
-                        $"length: {Mathf.Round(slider.Slider.Distance * 100f) / 100f}";
+                        $"length: {Mathf.Round(slider.Slider.Length * 100f) / 100f}";
                 }
                 else
                 {

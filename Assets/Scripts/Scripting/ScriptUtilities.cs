@@ -99,9 +99,11 @@ namespace OsuPlayground.Scripting
             => this.playfield.HitCircle(position, true);
 
         // Jint passes JavaScript arrays to C# code as objects[], hence the casting.
+        public Slider AddSlider(CurveType curveType, object[] list)
+            => this.playfield.Slider(curveType, list.Cast<Vector2>().ToList());
         public Slider AddSlider(CurveType curveType, object[] list, bool draw)
             => this.playfield.Slider(curveType, list.Cast<Vector2>().ToList(), draw);
-        public Slider AddSlider(CurveType curveType, object[] list)
-            => this.playfield.Slider(curveType, list.Cast<Vector2>().ToList(), true);
+        public Slider AddSlider(CurveType curveType, object[] list, bool draw, float length)
+            => this.playfield.Slider(curveType, list.Cast<Vector2>().ToList(), draw, length);
     }
 }

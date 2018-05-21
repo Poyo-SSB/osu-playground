@@ -10,7 +10,7 @@ namespace OsuPlayground.HitObjects
     // https://github.com/ppy/osu/blob/master/osu.Game/Rulesets/Objects/SliderCurve.cs
     public class Slider : HitObject
     {
-        public float Distance;
+        public float Length;
 
         public List<Vector2> ControlPoints;
 
@@ -72,17 +72,21 @@ namespace OsuPlayground.HitObjects
 
         private void CalculateCumulativeLengthAndTrimPath()
         {
-            var lengthPerBeat = 100 * Options.SliderMultiplier.Value * Options.SpeedMultiplier.Value;
-            var lengthPerSnap = lengthPerBeat / Options.BeatSnapDivisor.Value;
-
-            float distance = 0;
-
-            for (int i = 0; i < this.calculatedPath.Count - 1; i++)
+            // If the length has already been defined by the user, don't recalculate it.
+            if (this.Length == 0)
             {
-                distance += (this.calculatedPath[i + 1] - this.calculatedPath[i]).magnitude;
-            }
+                var lengthPerBeat = 100 * Options.SliderMultiplier.Value * Options.SpeedMultiplier.Value;
+                var lengthPerSnap = lengthPerBeat / Options.BeatSnapDivisor.Value;
 
-            this.Distance = distance - (distance % lengthPerSnap);
+                float length = 0;
+
+                for (int i = 0; i < this.calculatedPath.Count - 1; i++)
+                {
+                    length += (this.calculatedPath[i + 1] - this.calculatedPath[i]).magnitude;
+                }
+
+                this.Length = length - (length % lengthPerSnap);
+            }
 
             float l = 0;
 
@@ -91,25 +95,26 @@ namespace OsuPlayground.HitObjects
 
             for (int i = 0; i < this.calculatedPath.Count - 1; ++i)
             {
-                Vector2 diff = this.calculatedPath[i + 1] - this.calculatedPath[i];
+                l += (this.calculatedPath[i + 1] - this.calculatedPath[i]).magnitude;
+                this.cumulativeLength.Add(l);
+            }
+
+            if (l < this.Length && this.calculatedPath.Count > 1)
+            {
+                Vector2 diff = this.calculatedPath[this.calculatedPath.Count - 1] - this.calculatedPath[this.calculatedPath.Count - 2];
                 float d = diff.magnitude;
 
-                if (this.Distance - l < d)
+                if (d <= 0)
                 {
-                    this.calculatedPath[i + 1] = this.calculatedPath[i] + diff * (float)((this.Distance - l) / d);
-                    this.calculatedPath.RemoveRange(i + 2, this.calculatedPath.Count - 2 - i);
-
-                    l = this.Distance;
-                    this.cumulativeLength.Add(l);
-                    break;
+                    return;
                 }
 
-                l += d;
-                this.cumulativeLength.Add(l);
+                this.calculatedPath[this.calculatedPath.Count - 1] += diff * ((this.Length - l) / d);
+                this.cumulativeLength[this.calculatedPath.Count - 1] = this.Length;
             }
         }
 
-        private int IndexOfDistance(float d)
+        private int IndexOfLength(float d)
         {
             int i = this.cumulativeLength.BinarySearch(d);
             if (i < 0)
@@ -120,7 +125,7 @@ namespace OsuPlayground.HitObjects
             return i;
         }
 
-        private float ProgressToDistance(float progress) => Math.Max(Math.Min(progress, 1), 0) * this.Distance;
+        private float ProgressToLength(float progress) => Math.Max(Math.Min(progress, 1), 0) * this.Length;
 
         private Vector2 InterpolateVertices(int i, float d)
         {
@@ -150,7 +155,7 @@ namespace OsuPlayground.HitObjects
             }
 
             float w = (d - d0) / (d1 - d0);
-            return p0 + (p1 - p0) * (float)w;
+            return p0 + (p1 - p0) * w;
         }
 
         public List<Vector2> GetPath()
@@ -158,8 +163,8 @@ namespace OsuPlayground.HitObjects
             CalculatePath();
             CalculateCumulativeLengthAndTrimPath();
 
-            float d0 = ProgressToDistance(0);
-            float d1 = ProgressToDistance(1);
+            float d0 = ProgressToLength(0);
+            float d1 = ProgressToLength(1);
 
             var path = new List<Vector2>();
 
@@ -193,8 +198,8 @@ namespace OsuPlayground.HitObjects
             CalculatePath();
             CalculateCumulativeLengthAndTrimPath();
 
-            float d = ProgressToDistance(progress);
-            return InterpolateVertices(IndexOfDistance(d), d);
+            float d = ProgressToLength(progress);
+            return InterpolateVertices(IndexOfLength(d), d);
         }
 
         public override string ToString()
@@ -222,8 +227,8 @@ namespace OsuPlayground.HitObjects
                 Math.Round(this.Position.y),
                 type,
                 String.Join("|", this.ControlPoints.Skip(1).Select(x => String.Format("{0}:{1}", Math.Round(x.x), Math.Round(x.y))).ToArray()),
-                this.Distance);
+                this.Length);
         }
-        
+
     }
 }

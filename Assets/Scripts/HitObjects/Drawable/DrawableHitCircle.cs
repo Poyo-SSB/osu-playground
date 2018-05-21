@@ -16,15 +16,15 @@ namespace OsuPlayground.HitObjects.Drawable
 
             this.rectTransform.anchoredPosition3D = new Vector3(0, 0, index * radius);
 
-            this.Position = hitCircle.Position.PlayfieldOffset();
+            this.Position = hitCircle.Position;
 
             this.Text.text = index.ToString();
             var textSize = Mathf.RoundToInt(ratio * Constants.BASE_TEXT_SIZE * (radius / Constants.BASE_CIRCLE_RADIUS));
             this.Text.fontSize = textSize;
             this.Text.enabled = textSize > 0;
-            this.Text.rectTransform.anchoredPosition = ratio * this.Position;
+            this.Text.rectTransform.anchoredPosition = ratio * this.Position.PlayfieldOffset();
 
-            this.Circle.rectTransform.anchoredPosition = ratio * this.Position;
+            this.Circle.rectTransform.anchoredPosition = ratio * this.Position.PlayfieldOffset();
             this.Circle.Radius = ratio * radius;
             this.Circle.SetVerticesDirty();
         }
