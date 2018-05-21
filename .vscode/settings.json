@@ -1,0 +1,15 @@
+{
+    "files.exclude": {
+        "**/*.meta": true,
+        "**/*.csproj": true,
+        "**/*.sln": true,
+        "[Bb]uilds": true,
+        "[Ll]ibrary": true,
+        "[Oo]bj": true,
+        "[Tt]emp": true,
+        "[Pp]roject[Ss]ettings": true,
+        "[Pp]ackages": true,
+        "**/[Pp]ackages": true,
+        "**/[Ff]onts": true
+    }
+}
