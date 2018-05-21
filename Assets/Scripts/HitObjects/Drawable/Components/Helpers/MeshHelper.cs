@@ -12,7 +12,8 @@ namespace OsuPlayground.HitObjects.Drawable.Components.Helpers
             return new UIVertex
             {
                 position = position,
-                color = color
+                color = color,
+                normal = Vector3.forward
             };
         }
 

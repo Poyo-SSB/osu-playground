@@ -8,6 +8,8 @@ namespace OsuPlayground.UI
     /// </summary>
     public class PanelManager : MonoBehaviour
     {
+        private RectTransform rectTransform;
+
         [SerializeField]
         private ToolbarPanel toolbar;
         [SerializeField]
@@ -15,11 +17,15 @@ namespace OsuPlayground.UI
         [SerializeField]
         private PlayfieldPanel playfield;
 
+        private void Awake() => this.rectTransform = this.GetComponent<RectTransform>();
+
         /// <summary>
         /// Positions each panel.
         /// </summary>
         private void Update()
         {
+            this.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
+
             var optionsWidth = Options.ShowOptions.Value ? Constants.OPTIONS_WIDTH : 0;
 
             this.toolbar.Background.color = Constants.TOOLBAR_COLOR;

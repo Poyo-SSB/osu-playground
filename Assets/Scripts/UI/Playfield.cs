@@ -27,6 +27,7 @@ namespace OsuPlayground.UI
         private Dictionary<int, Slider> sliderBuffer = new Dictionary<int, Slider>();
 
         public string LatestHitObjects = String.Empty;
+        public string HoveredObject = String.Empty;
 
         private void Awake() => this.RectTransform = this.GetComponent<RectTransform>();
 
@@ -88,12 +89,14 @@ namespace OsuPlayground.UI
             // Set the relevant variables so the hit objects are drawn in the right place.
             for (int i = 0; i < circleCount; i++)
             {
-                this.hitCircles[i].UpdateWith(radius, ratio, this.hitCircleBuffer.ElementAt(i));
+                var pair = this.hitCircleBuffer.ElementAt(i);
+                this.hitCircles[i].UpdateWith(radius, ratio, pair.Value, pair.Key);
                 this.hitCircles[i].transform.SetSiblingIndex(this.bufferIndex - this.hitCircleBuffer.ElementAt(i).Key);
             }
             for (int i = 0; i < sliderCount; i++)
             {
-                this.sliders[i].UpdateWith(radius, ratio, this.sliderBuffer.ElementAt(i));
+                var pair = this.sliderBuffer.ElementAt(i);
+                this.sliders[i].UpdateWith(radius, ratio, pair.Value, pair.Key);
                 this.sliders[i].transform.SetSiblingIndex(this.bufferIndex - this.sliderBuffer.ElementAt(i).Key);
             }
 
@@ -128,6 +131,34 @@ namespace OsuPlayground.UI
             this.bufferIndex = 0;
             this.hitCircleBuffer.Clear();
             this.sliderBuffer.Clear();
+
+            var r = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit info;
+            if (Physics.Raycast(r, out info, Single.MaxValue, ~0))
+            {
+                var hitCircle = info.transform.parent.GetComponent<DrawableHitCircle>();
+                var slider = info.transform.parent.GetComponent<DrawableSlider>();
+                if (hitCircle != null)
+                {
+                    this.HoveredObject = $"[{hitCircle.Index}] Hit circle - " +
+                        $"position: ({Mathf.Round(hitCircle.Position.x * 100f) / 100f}, {Mathf.Round(hitCircle.Position.y * 100f) / 100f})";
+                }
+                else if (slider != null)
+                {
+                    this.HoveredObject = $"[{slider.Index}] Slider - " +
+                        $"start: ({Mathf.Round(slider.Position.x * 100f) / 100f}, {Mathf.Round(slider.Position.y * 100f) / 100f}), " +
+                        $"end: ({Mathf.Round(slider.Slider.PositionAt(1).x * 100f) / 100f}, {Mathf.Round(slider.Slider.PositionAt(1).y * 100f) / 100f}), " +
+                        $"length: {Mathf.Round(slider.Slider.Distance * 100f) / 100f}";
+                }
+                else
+                {
+                    this.HoveredObject = String.Empty;
+                }
+            }
+            else
+            {
+                this.HoveredObject = String.Empty;
+            }
         }
     }
 }

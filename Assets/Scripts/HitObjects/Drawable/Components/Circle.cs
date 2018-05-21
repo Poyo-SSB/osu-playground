@@ -17,6 +17,9 @@ namespace OsuPlayground.HitObjects.Drawable.Components
             vh.Clear();
 
             CircleDrawer.Circle(this.Position, vh, this.Radius, Constants.BORDER_COLOR);
+
+            this.GetComponent<SphereCollider>().radius = this.Radius;
+
             CircleDrawer.Circle(this.Position, vh, this.Radius * Constants.BODY_SIZE_MULTIPLIER, Constants.BODY_COLOR);
         }
     }

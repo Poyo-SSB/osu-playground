@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 224954457346939262}
   - component: {fileID: 222308003598344834}
   - component: {fileID: 114207718877282542}
+  - component: {fileID: 135778651967946020}
   m_Layer: 5
   m_Name: Circle
   m_TagString: Untagged
@@ -128,6 +129,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Text: {fileID: 114752829176970280}
   Circle: {fileID: 114207718877282542}
+  Index: 0
+--- !u!135 &135778651967946020
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1920333046676056}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!222 &222308003598344834
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -1,6 +1,7 @@
 ﻿using OsuPlayground.UI.Handles;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace OsuPlayground.UI.Panels
 {
@@ -15,6 +16,8 @@ namespace OsuPlayground.UI.Panels
         private Playfield playfield;
         [SerializeField]
         private HandleManager handleManager;
+        [SerializeField]
+        private Text infoText;
 
         public Vector2 RawOffset;
         public float RawZoom;
@@ -60,6 +63,8 @@ namespace OsuPlayground.UI.Panels
                 Playfield.WIDTH,
                 Playfield.HEIGHT);
         }
+
+        private void LateUpdate() => this.infoText.text = this.playfield.HoveredObject;
 
         public void OnDrag(PointerEventData eventData)
         {

@@ -11,31 +11,42 @@ namespace OsuPlayground.HitObjects.Drawable
         public SliderBody Body;
         public SliderTicks Ticks;
 
-        public void UpdateWith(float radius, float ratio, KeyValuePair<int, Slider> keyValuePair)
-        {
-            var position = keyValuePair.Value.Position.PlayfieldOffset();
+        public Slider Slider;
 
-            this.Text.text = keyValuePair.Key.ToString();
+        private RectTransform rectTransform;
+
+        private void Awake() => this.rectTransform = this.GetComponent<RectTransform>();
+
+        public void UpdateWith(float radius, float ratio, Slider slider, int index)
+        {
+            this.Index = index;
+            this.Slider = slider;
+
+            this.rectTransform.anchoredPosition3D = new Vector3(0, 0, index * radius);
+
+            this.Position = slider.Position.PlayfieldOffset();
+
+            this.Text.text = index.ToString();
             var textSize = Mathf.RoundToInt(ratio * Constants.BASE_TEXT_SIZE * (radius / Constants.BASE_CIRCLE_RADIUS));
             this.Text.fontSize = textSize;
             this.Text.enabled = textSize > 0;
-            this.Text.rectTransform.anchoredPosition = ratio * position;
+            this.Text.rectTransform.anchoredPosition = ratio * this.Position;
 
-            this.Circle.rectTransform.anchoredPosition = ratio * position;
+            this.Circle.rectTransform.anchoredPosition = ratio * this.Position;
             this.Circle.Radius = ratio * radius;
             this.Circle.SetVerticesDirty();
             
             this.Body.Radius = ratio * radius;
-            this.Body.Path = keyValuePair.Value.GetPath().Select(x => ratio * x.PlayfieldOffset()).ToList();
+            this.Body.Path = slider.GetPath().Select(x => ratio * x.PlayfieldOffset()).ToList();
             this.Body.SetVerticesDirty();
 
             // Calculate the positions of ticks and draw them accordingly.
             var tickDistance = 100 * Options.SliderMultiplier.Value * Options.SpeedMultiplier.Value / Options.TickRate.Value;
 
             List<Vector2> tickPositions = new List<Vector2>();
-            for (float i = 0; i < keyValuePair.Value.Distance; i += tickDistance)
+            for (float i = 0; i < slider.Distance; i += tickDistance)
             {
-                var tickPosition = keyValuePair.Value.PositionAt(i / keyValuePair.Value.Distance);
+                var tickPosition = slider.PositionAt(i / slider.Distance);
                 tickPositions.Add(ratio * tickPosition.PlayfieldOffset());
             }
 

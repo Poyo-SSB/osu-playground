@@ -6,17 +6,25 @@ namespace OsuPlayground.HitObjects.Drawable
 {
     public class DrawableHitCircle : DrawableHitObject
     {
-        public void UpdateWith(float radius, float ratio, KeyValuePair<int, HitCircle> keyValuePair)
-        {
-            var position = keyValuePair.Value.Position.PlayfieldOffset();
+        private RectTransform rectTransform;
 
-            this.Text.text = keyValuePair.Key.ToString();
+        private void Awake() => this.rectTransform = this.GetComponent<RectTransform>();
+
+        public void UpdateWith(float radius, float ratio, HitCircle hitCircle, int index)
+        {
+            this.Index = index;
+
+            this.rectTransform.anchoredPosition3D = new Vector3(0, 0, index * radius);
+
+            this.Position = hitCircle.Position.PlayfieldOffset();
+
+            this.Text.text = index.ToString();
             var textSize = Mathf.RoundToInt(ratio * Constants.BASE_TEXT_SIZE * (radius / Constants.BASE_CIRCLE_RADIUS));
             this.Text.fontSize = textSize;
             this.Text.enabled = textSize > 0;
-            this.Text.rectTransform.anchoredPosition = ratio * position;
+            this.Text.rectTransform.anchoredPosition = ratio * this.Position;
 
-            this.Circle.rectTransform.anchoredPosition = ratio * position;
+            this.Circle.rectTransform.anchoredPosition = ratio * this.Position;
             this.Circle.Radius = ratio * radius;
             this.Circle.SetVerticesDirty();
         }
