@@ -29,5 +29,13 @@ namespace OsuPlayground.UI.Handles
                 handle.UpdatePosition(this.RectTransform.rect.width / Playfield.WIDTH);
             }
         }
+
+        public void MoveAll(Vector2 delta)
+        {
+            foreach (var handle in this.handles)
+            {
+                handle.Bound.Value += delta;
+            }
+        }
     }
 }

@@ -38,5 +38,6 @@ namespace OsuPlayground
         public const float BASE_TEXT_SIZE = 35f;
 
         public static readonly Color HANDLE_COLOR = Color.yellow;
+        public static readonly Color MULTIPLE_HANDLE_COLOR = Color.blue;
     }
 }
