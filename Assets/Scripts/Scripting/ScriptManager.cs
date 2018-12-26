@@ -77,7 +77,7 @@ namespace OsuPlayground.Scripting
 
             try
             {
-                engine.Execute(this.baseCode + code);
+                engine.Execute(code + this.baseCode);
             }
             catch (Exception e)
             {
