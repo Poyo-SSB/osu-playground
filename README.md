@@ -1,6 +1,6 @@
 # osu!Playground
 
-I don't like the current *osu!* editor. For a person like me who likes interesting geomtry, perfection is difficult to achieve using it alone.
+I don't like the current *osu!* editor. For a person like me who likes interesting geometry, perfection is difficult to achieve using it alone.
 
 |![](https://i.imgur.com/fk22Lzm.png)|![](https://i.imgur.com/DcfmKYD.png)|
 |-|-|
@@ -14,6 +14,8 @@ You'll need some scripts to actually do anything with it, so take a look at the 
 
 ## Controls
 
+* <kbd>Left Click</kbd> + drag - move control point
+* <kbd>Right Click</kbd> + drag - move all control points
 * <kbd>Middle Click</kbd> + drag - pan playfield
 * <kbd>Ctrl</kbd> + scroll - zoom
 
