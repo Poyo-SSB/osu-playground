@@ -3,7 +3,7 @@ set /p version="Version tag (v1.x.x): "
 
 echo Building...
 
-"C:\Program Files\Unity\Editor\Unity" -batchmode -quit -projectPath %cd% -executeMethod ApplicationBuilder.Build -version %version% -buildfolder %cd%\Builds > nul
+"C:\Program Files\Unity\Hub\Editor\2019.3.0a2\Editor\Unity" -batchmode -quit -projectPath %cd% -executeMethod ApplicationBuilder.Build -version %version% -buildfolder %cd%\Builds
 echo Copying scripts...
 
 robocopy /s /mir %cd%\Scripts\ %cd%\Builds\%version%\osuPlayground-%version%-win32\Scripts\ > nul
