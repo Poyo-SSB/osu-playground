@@ -52,5 +52,12 @@ public static class ApplicationBuilder
             targetGroup = BuildTargetGroup.Standalone,
             target = BuildTarget.StandaloneOSX
         });
+        BuildPipeline.BuildPlayer(new BuildPlayerOptions
+        {
+            locationPathName = Path.Combine(buildFolder, $"{version}/osuPlayground-{version}-linux/osuPlayground.x86_64"),
+            scenes = scenes,
+            targetGroup = BuildTargetGroup.Standalone,
+            target = BuildTarget.StandaloneLinux64
+        });
     }
 }
